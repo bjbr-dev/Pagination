@@ -11,3 +11,6 @@ before_build:
 - cmd: nuget restore
 build:
   verbosity: minimal
+  publish_nuget: true
+artifacts:
+	- path: '**\*.nupkg'
