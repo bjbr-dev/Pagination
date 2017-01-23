@@ -14,7 +14,7 @@ Pagination is a tiny library to easily paginate lists of data and group related 
 *Documentation in progress!*
 
 ## Installation
-*Documentation in progress!*
+Simply add the nuget package [berkeleybross.pagination](https://www.nuget.org/packages/berkeleybross.Pagination/) to your project.
 
 ## Licensing and Attribution
 See [License](LICENSE).
