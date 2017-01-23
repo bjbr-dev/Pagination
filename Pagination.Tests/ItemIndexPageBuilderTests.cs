@@ -48,6 +48,32 @@ namespace Pagination.Tests
             : ItemIndexPageBuilderTests
         {
             [Test]
+            public void Returns_empty_page_when_total_number_is_0_and_take_is_null()
+            {
+                // Arrange
+                var sut = new ItemIndexPageBuilder(0, null);
+
+                // Act
+                var result = sut.GetCurrentPage(0);
+
+                // Assert
+                result.ShouldBeEquivalentTo(new Page(1, int.MaxValue, true, -1, -1));
+            }
+
+            [Test]
+            public void Returns_empty_page_when_total_number_is_0_and_take_is_set()
+            {
+                // Arrange
+                var sut = new ItemIndexPageBuilder(0, 5);
+
+                // Act
+                var result = sut.GetCurrentPage(0);
+
+                // Assert
+                result.ShouldBeEquivalentTo(new Page(1, 5, true, -1, -1));
+            }
+
+            [Test]
             public void When_take_is_null_sets_maximum_number_of_items_to_max_value()
             {
                 // Arrange

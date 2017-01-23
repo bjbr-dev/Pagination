@@ -29,7 +29,10 @@ namespace Pagination
         {
             var totalItemCount = source.Count();
             var page = pageBuilder.GetCurrentPage(totalItemCount);
-            var result = source.Skip(Math.Max(page.FirstItemIndex, 0)).Take(page.PageSize).ToImmutableArray();
+
+            var result = page.PageSize == 0
+                ? ImmutableArray<T>.Empty
+                : source.Skip(page.FirstItemIndex).Take(page.PageSize).ToImmutableArray();
 
             return new PagedList<T>(totalItemCount, page.MaximumPageSize, new Page<T>(page, result));
         }

@@ -15,6 +15,20 @@ namespace Pagination.Tests
             : PaginationHelpersTests
         {
             [Test]
+            public void Returns_empty_pagedlist_when_given_empty_source()
+            {
+                // Arrange
+                var source = Enumerable.Empty<int>();
+
+                // Act
+                var result = source.Page(2, null);
+
+                // Assert
+                var currentPage = new Page<int>(new Page(2, int.MaxValue, true, -1, -1), ImmutableArray<int>.Empty);
+                result.ShouldBeEquivalentTo(new PagedList<int>(0, int.MaxValue, currentPage));
+            }
+
+            [Test]
             public void Skips_appropriate_number()
             {
                 // Arrange
@@ -74,6 +88,20 @@ namespace Pagination.Tests
         private class PageQueryable
             : PaginationHelpersTests
         {
+            [Test]
+            public void Returns_empty_pagedlist_when_given_empty_source()
+            {
+                // Arrange
+                var source = Enumerable.Empty<int>().AsQueryable();
+
+                // Act
+                var result = source.Page(2, null);
+
+                // Assert
+                var currentPage = new Page<int>(new Page(2, int.MaxValue, true, -1, -1), ImmutableArray<int>.Empty);
+                result.ShouldBeEquivalentTo(new PagedList<int>(0, int.MaxValue, currentPage));
+            }
+
             [Test]
             public void Skips_appropriate_number()
             {

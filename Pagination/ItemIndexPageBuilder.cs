@@ -44,7 +44,11 @@ namespace Pagination
                 ? 1
                 : 2;
 
-            return new Page(pageNumber, int.MaxValue, true, skip, totalNumberOfItems - 1);
+            var firstPageItemIndex = totalNumberOfItems == 0
+                ? -1
+                : skip;
+            var lastPageItemIndex = totalNumberOfItems - 1;
+            return new Page(pageNumber, int.MaxValue, true, firstPageItemIndex, lastPageItemIndex);
         }
 
         private Page GetCurrentPage(int totalNumberOfItems, int skip, int take)
@@ -62,7 +66,9 @@ namespace Pagination
                     : new Page(pageNumber, take, false, -1, -1);
             }
 
-            return new Page(pageNumber, take, pageNumber == lastPageNumber, Math.Min(skip, lastItemIndex), Math.Min(checked(skip + (take - 1)), lastItemIndex));
+            var firstPageItemIndex = Math.Min(skip, lastItemIndex);
+            var lastPageItemIndex = Math.Min(checked(skip + (take - 1)), lastItemIndex);
+            return new Page(pageNumber, take, pageNumber == lastPageNumber, firstPageItemIndex, lastPageItemIndex);
         }
     }
 }
