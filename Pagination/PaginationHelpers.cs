@@ -5,7 +5,6 @@ namespace Pagination
 {
     using System;
     using System.Collections.Generic;
-    using System.Collections.Immutable;
     using System.Linq;
 
     public static class PaginationHelpers
@@ -30,11 +29,13 @@ namespace Pagination
             var totalItemCount = source.Count();
             var page = pageBuilder.GetCurrentPage(totalItemCount);
 
-            var result = page.PageSize == 0
-                ? ImmutableArray<T>.Empty
-                : source.Skip(page.FirstItemIndex).Take(page.PageSize).ToImmutableArray();
+            if (page.IsEmpty)
+            {
+                return PagedList<T>.Empty(totalItemCount, page);
+            }
 
-            return new PagedList<T>(totalItemCount, page.MaximumPageSize, new Page<T>(page, result));
+            var result = source.Skip(page.FirstItemIndex).Take(page.PageSize);
+            return PagedList<T>.Create(totalItemCount, page, result);
         }
 
         /// <summary>
@@ -56,9 +57,13 @@ namespace Pagination
         {
             var totalItemCount = source.Count();
             var page = pageBuilder.GetCurrentPage(totalItemCount);
-            var result = source.Skip(Math.Max(page.FirstItemIndex, 0)).Take(page.PageSize).ToImmutableArray();
+            if (page.IsEmpty)
+            {
+                return PagedList<T>.Empty(totalItemCount, page);
+            }
 
-            return new PagedList<T>(totalItemCount, page.MaximumPageSize, new Page<T>(page, result));
+            var result = source.Skip(Math.Max(page.FirstItemIndex, 0)).Take(page.PageSize);
+            return PagedList<T>.Create(totalItemCount, page, result);
         }
     }
 }

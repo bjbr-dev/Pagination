@@ -82,14 +82,19 @@ namespace Pagination
 
         /// <summary>
         /// Gets the 0-based index of the first item on this page, in respect to the entire collection.
-        /// (Or -1 if there are no items in this page)
+        /// (Or -1 if the page is empty)
         /// </summary>
         public int FirstItemIndex { get; }
 
         /// <summary>
         /// Gets the 0-based index of the last item on this page, in respect to the entire collection
-        /// (Or -1 if there are no items in this page)
+        /// (Or -1 if the page is empty)
         /// </summary>
         public int LastItemIndex { get; }
+
+        /// <summary>
+        /// Gets a value indicating whether this page is empty (i.e. <see cref="PageSize"/> equals 0)
+        /// </summary>
+        public bool IsEmpty => this.PageSize == 0;
     }
 }

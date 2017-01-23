@@ -24,8 +24,8 @@ namespace Pagination.Tests
                 var result = source.Page(2, null);
 
                 // Assert
-                var currentPage = new Page<int>(new Page(2, int.MaxValue, true, -1, -1), ImmutableArray<int>.Empty);
-                result.ShouldBeEquivalentTo(new PagedList<int>(0, int.MaxValue, currentPage));
+                var currentPage = new Page(2, int.MaxValue, true, -1, -1);
+                result.ShouldBeEquivalentTo(PagedList<int>.Empty(0, currentPage));
             }
 
             [Test]
@@ -38,8 +38,8 @@ namespace Pagination.Tests
                 var result = source.Page(2, null);
 
                 // Assert
-                var currentPage = new Page<int>(new Page(2, int.MaxValue, true, 2, 8), new[] { 3, 4, 5, 6, 7, 8, 9 }.ToImmutableArray());
-                result.ShouldBeEquivalentTo(new PagedList<int>(9, int.MaxValue, currentPage));
+                var currentPage = new Page(2, int.MaxValue, true, 2, 8);
+                result.ShouldBeEquivalentTo(PagedList<int>.Create(9, currentPage, new[] { 3, 4, 5, 6, 7, 8, 9 }));
             }
 
             [Test]
@@ -52,8 +52,8 @@ namespace Pagination.Tests
                 var result = source.Page(0, 2);
 
                 // Assert
-                var currentPage = new Page<int>(new Page(1, 2, false, 0, 1), new[] { 1, 2 }.ToImmutableArray());
-                result.ShouldBeEquivalentTo(new PagedList<int>(9, 2, currentPage));
+                var currentPage = new Page(1, 2, false, 0, 1);
+                result.ShouldBeEquivalentTo(PagedList<int>.Create(9, currentPage, new[] { 1, 2 }));
             }
 
             [Test]
@@ -66,8 +66,7 @@ namespace Pagination.Tests
                 var result = source.Page(4, 2);
 
                 // Assert
-                var currentPage = new Page<int>(new Page(3, 2, false, 4, 5), new[] { 5, 6 }.ToImmutableArray());
-                result.ShouldBeEquivalentTo(new PagedList<int>(9, 2, currentPage));
+                result.ShouldBeEquivalentTo(PagedList<int>.Create(9, new Page(3, 2, false, 4, 5), new[] { 5, 6 }));
             }
 
             [Test]
@@ -80,8 +79,7 @@ namespace Pagination.Tests
                 var result = source.Page(50, 2);
 
                 // Assert
-                var currentPage = new Page<int>(new Page(26, 2, false, -1, -1), new int[0].ToImmutableArray());
-                result.ShouldBeEquivalentTo(new PagedList<int>(9, 2, currentPage));
+                result.ShouldBeEquivalentTo(PagedList<int>.Empty(9, new Page(26, 2, false, -1, -1)));
             }
         }
 
@@ -98,8 +96,8 @@ namespace Pagination.Tests
                 var result = source.Page(2, null);
 
                 // Assert
-                var currentPage = new Page<int>(new Page(2, int.MaxValue, true, -1, -1), ImmutableArray<int>.Empty);
-                result.ShouldBeEquivalentTo(new PagedList<int>(0, int.MaxValue, currentPage));
+                var currentPage = new Page(2, int.MaxValue, true, -1, -1);
+                result.ShouldBeEquivalentTo(PagedList<int>.Empty(0, currentPage));
             }
 
             [Test]
@@ -112,8 +110,8 @@ namespace Pagination.Tests
                 var result = source.Page(2, null);
 
                 // Assert
-                var currentPage = new Page<int>(new Page(2, int.MaxValue, true, 2, 8), new[] { 3, 4, 5, 6, 7, 8, 9 }.ToImmutableArray());
-                result.ShouldBeEquivalentTo(new PagedList<int>(9, int.MaxValue, currentPage));
+                var currentPage = new Page(2, int.MaxValue, true, 2, 8);
+                result.ShouldBeEquivalentTo(PagedList<int>.Create(9, currentPage, new[] { 3, 4, 5, 6, 7, 8, 9 }));
             }
 
             [Test]
@@ -126,8 +124,8 @@ namespace Pagination.Tests
                 var result = source.Page(0, 2);
 
                 // Assert
-                var currentPage = new Page<int>(new Page(1, 2, false, 0, 1), new[] { 1, 2 }.ToImmutableArray());
-                result.ShouldBeEquivalentTo(new PagedList<int>(9, 2, currentPage));
+                var currentPage = new Page(1, 2, false, 0, 1);
+                result.ShouldBeEquivalentTo(PagedList<int>.Create(9, currentPage, new[] { 1, 2 }));
             }
 
             [Test]
@@ -140,8 +138,7 @@ namespace Pagination.Tests
                 var result = source.Page(4, 2);
 
                 // Assert
-                var currentPage = new Page<int>(new Page(3, 2, false, 4, 5), new[] { 5, 6 }.ToImmutableArray());
-                result.ShouldBeEquivalentTo(new PagedList<int>(9, 2, currentPage));
+                result.ShouldBeEquivalentTo(PagedList<int>.Create(9, new Page(3, 2, false, 4, 5), new[] { 5, 6 }));
             }
 
             [Test]
@@ -154,8 +151,7 @@ namespace Pagination.Tests
                 var result = source.Page(50, 2);
 
                 // Assert
-                var currentPage = new Page<int>(new Page(26, 2, false, -1, -1), new int[0].ToImmutableArray());
-                result.ShouldBeEquivalentTo(new PagedList<int>(9, 2, currentPage));
+                result.ShouldBeEquivalentTo(PagedList<int>.Empty(9, new Page(26, 2, false, -1, -1)));
             }
         }
     }
