@@ -15,7 +15,6 @@ namespace Pagination
 
             this.TotalItemCount = totalItemCount;
             this.PageSize = pageSize;
-
             this.PageCount = GetPageCount(totalItemCount, pageSize);
         }
 
