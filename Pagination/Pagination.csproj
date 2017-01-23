@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ensure.cs" />
+    <Compile Include="PageIndexPageBuilder.cs" />
     <Compile Include="PaginationHelpers.cs" />
     <Compile Include="IPageBuilder.cs" />
     <Compile Include="Page.cs" />

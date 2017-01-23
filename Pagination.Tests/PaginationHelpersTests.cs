@@ -55,6 +55,20 @@ namespace Pagination.Tests
                 var currentPage = new Page<int>(new Page(3, 2, false, 4, 5), new[] { 5, 6 }.ToImmutableArray());
                 result.ShouldBeEquivalentTo(new PagedList<int>(9, 2, currentPage));
             }
+
+            [Test]
+            public void Allows_page_to_be_past_last_item()
+            {
+                // Arrange
+                var source = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
+                // Act
+                var result = source.Page(50, 2);
+
+                // Assert
+                var currentPage = new Page<int>(new Page(26, 2, false, -1, -1), new int[0].ToImmutableArray());
+                result.ShouldBeEquivalentTo(new PagedList<int>(9, 2, currentPage));
+            }
         }
 
         private class PageQueryable
@@ -99,6 +113,20 @@ namespace Pagination.Tests
 
                 // Assert
                 var currentPage = new Page<int>(new Page(3, 2, false, 4, 5), new[] { 5, 6 }.ToImmutableArray());
+                result.ShouldBeEquivalentTo(new PagedList<int>(9, 2, currentPage));
+            }
+
+            [Test]
+            public void Allows_page_to_be_past_last_item()
+            {
+                // Arrange
+                var source = new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 }.AsQueryable();
+
+                // Act
+                var result = source.Page(50, 2);
+
+                // Assert
+                var currentPage = new Page<int>(new Page(26, 2, false, -1, -1), new int[0].ToImmutableArray());
                 result.ShouldBeEquivalentTo(new PagedList<int>(9, 2, currentPage));
             }
         }

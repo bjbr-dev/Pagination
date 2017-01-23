@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ItemIndexPageBuilderTests.cs" />
+    <Compile Include="PageIndexPageBuilderTests.cs" />
     <Compile Include="PageTests.cs" />
     <Compile Include="PagedListTests.cs" />
     <Compile Include="PaginationHelpersTests.cs" />
