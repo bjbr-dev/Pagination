@@ -13,4 +13,4 @@ build:
   verbosity: minimal
   publish_nuget: true
 artifacts:
-	- path: '**\*.nupkg'
+  - path: '**\*.nupkg'
