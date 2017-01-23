@@ -40,6 +40,32 @@ namespace Pagination.Tests
             : PageIndexPageBuilderTests
         {
             [Test]
+            public void Sets_appropriate_values_when_there_are_no_items()
+            {
+                // Arrange
+                var sut = new PageIndexPageBuilder(1, 10);
+
+                // Act
+                var result = sut.GetCurrentPage(0);
+
+                // Assert
+                result.ShouldBeEquivalentTo(new Page(1, 10, true, -1, -1));
+            }
+
+            [Test]
+            public void Sets_appropriate_values_when_there_are_no_items_and_not_on_first_page()
+            {
+                // Arrange
+                var sut = new PageIndexPageBuilder(4, 10);
+
+                // Act
+                var result = sut.GetCurrentPage(0);
+
+                // Assert
+                result.ShouldBeEquivalentTo(new Page(4, 10, false, -1, -1));
+            }
+
+            [Test]
             public void Sets_appropriate_values_when_not_on_last_page()
             {
                 // Arrange

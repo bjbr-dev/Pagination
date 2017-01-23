@@ -31,7 +31,7 @@ namespace Pagination
                 return new Page(this.PageNumber, this.PageSize, false, -1, -1);
             }
 
-            var firstPageItemIndex = (this.PageNumber - 1) * this.PageSize;
+            var firstPageItemIndex = Math.Min((this.PageNumber - 1) * this.PageSize, lastItemIndex);
             var lastPageItemIndex = Math.Min((this.PageNumber * this.PageSize) - 1, lastItemIndex);
             return new Page(this.PageNumber, this.PageSize, this.PageNumber == lastPageNumber, firstPageItemIndex, lastPageItemIndex);
         }
