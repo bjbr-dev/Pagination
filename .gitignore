@@ -1,0 +1,13 @@
+# Project build artifacts
+Pagination/bin/
+Pagination/obj/
+Pagination.Tests/bin/
+Pagination.Tests/obj/
+
+# Standard VS folders
+**/packages/*
+!**/packages/build/
+
+.vs/
+**/*.user
+_NCrunch_*
