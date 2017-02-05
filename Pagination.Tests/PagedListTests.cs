@@ -17,17 +17,7 @@ namespace Pagination.Tests
             public void Throws_exception_when_total_item_count_is_less_than_0()
             {
                 // Act
-                Action act = () => new PagedList(-1, 10);
-
-                // Assert
-                act.ShouldThrow<ArgumentOutOfRangeException>();
-            }
-
-            [Test]
-            public void Throws_exception_when_page_size_is_less_than_1()
-            {
-                // Act
-                Action act = () => new PagedList(20, 0);
+                Action act = () => new PagedList(-1, new Page(1, 10, false, -1, -1));
 
                 // Assert
                 act.ShouldThrow<ArgumentOutOfRangeException>();
@@ -41,7 +31,7 @@ namespace Pagination.Tests
             public void Returns_constructor_argument()
             {
                 // Arrange
-                var sut = new PagedList(42, 10);
+                var sut = new PagedList(42, new Page(1, 10, false, -1, -1));
 
                 // Act
                 var result = sut.TotalItemCount;
@@ -63,7 +53,7 @@ namespace Pagination.Tests
             public int Returns_appropriate_value(int totalItemCount, int pageSize)
             {
                 // Arrange
-                var sut = new PagedList(totalItemCount, pageSize);
+                var sut = new PagedList(totalItemCount, new Page(1, pageSize, false, -1, -1));
 
                 // Act
                 return sut.PageCount;
@@ -77,7 +67,7 @@ namespace Pagination.Tests
             public void Returns_a_single_page_when_there_are_no_items()
             {
                 // Arrange
-                var sut = new PagedList(0, 10);
+                var sut = new PagedList(0, new Page(1, 10, false, -1, -1));
 
                 // Act
                 var pages = sut.Pages;
@@ -93,7 +83,7 @@ namespace Pagination.Tests
             public void Returns_a_single_page_when_number_of_items_is_less_than_page_size()
             {
                 // Arrange
-                var sut = new PagedList(5, 10);
+                var sut = new PagedList(5, new Page(1, 10, false, -1, -1));
 
                 // Act
                 var pages = sut.Pages;
@@ -109,7 +99,7 @@ namespace Pagination.Tests
             public void Returns_a_single_page_when_number_of_items_is_equal_to_page_size()
             {
                 // Arrange
-                var sut = new PagedList(10, 10);
+                var sut = new PagedList(10, new Page(1, 10, false, -1, -1));
 
                 // Act
                 var pages = sut.Pages;
@@ -125,7 +115,7 @@ namespace Pagination.Tests
             public void Returns_multiple_pages_when_there_are_more_items_than_page_size()
             {
                 // Arrange
-                var sut = new PagedList(20, 5);
+                var sut = new PagedList(20, new Page(1, 5, false, -1, -1));
 
                 // Act
                 var pages = sut.Pages;
@@ -144,7 +134,7 @@ namespace Pagination.Tests
             public void Returns_multiple_pages_when_there_is_only_one_item_on_the_last_page()
             {
                 // Arrange
-                var sut = new PagedList(16, 5);
+                var sut = new PagedList(16, new Page(1, 5, false, -1, -1));
 
                 // Act
                 var pages = sut.Pages;
@@ -163,7 +153,7 @@ namespace Pagination.Tests
             public void Returns_multiple_pages_when_the_last_page_is_partially_filled()
             {
                 // Arrange
-                var sut = new PagedList(18, 5);
+                var sut = new PagedList(18, new Page(1, 5, false, -1, -1));
 
                 // Act
                 var pages = sut.Pages;

@@ -8,14 +8,14 @@ namespace Pagination
 
     public class PagedList
     {
-        public PagedList(int totalItemCount, int pageSize)
+        public PagedList(int totalItemCount, Page currentPage)
         {
             Ensure.GreaterThanOrEqualTo(0, totalItemCount, nameof(totalItemCount));
-            Ensure.GreaterThanOrEqualTo(1, pageSize, nameof(pageSize));
+            Ensure.NotNull(currentPage, nameof(currentPage));
 
             this.TotalItemCount = totalItemCount;
-            this.PageSize = pageSize;
-            this.PageCount = GetPageCount(totalItemCount, pageSize);
+            this.CurrentPage = currentPage;
+            this.PageCount = GetPageCount(totalItemCount, currentPage.MaximumPageSize);
         }
 
         /// <summary>
@@ -31,7 +31,12 @@ namespace Pagination
         /// <summary>
         /// Gets the maximum number of items on each page.
         /// </summary>
-        public int PageSize { get; }
+        public int PageSize => this.CurrentPage.MaximumPageSize;
+
+        /// <summary>
+        /// Gets the page currently being viewed
+        /// </summary>
+        public Page CurrentPage { get; }
 
         /// <summary>
         /// Gets each page, starting from page 1 to the last page.

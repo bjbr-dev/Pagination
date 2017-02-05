@@ -12,12 +12,12 @@ namespace Pagination
         : PagedList
     {
         public PagedList(int totalItemCount, Page<T> currentPage)
-            : base(totalItemCount, currentPage.MaximumPageSize)
+            : base(totalItemCount, currentPage)
         {
             this.CurrentPage = currentPage;
         }
 
-        public Page<T> CurrentPage { get; }
+        public new Page<T> CurrentPage { get; }
 
         public ImmutableArray<T> Items => this.CurrentPage.Items;
 
