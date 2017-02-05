@@ -22,5 +22,14 @@ namespace Pagination
                 throw new ArgumentOutOfRangeException(paramName, actual, $"{paramName} must be less than {expected}.");
             }
         }
+
+        public static void NotNull<T>(T value, string paramName)
+            where T : class
+        {
+            if (value == null)
+            {
+                throw new ArgumentNullException(paramName);
+            }
+        }
     }
 }

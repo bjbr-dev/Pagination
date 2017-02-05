@@ -29,7 +29,7 @@ namespace Pagination
                 pageSize = (lastItemIndex - firstItemIndex) + 1;
             }
 
-            if (this.PageSize > maximumPageSize)
+            if (pageSize > maximumPageSize)
             {
                 throw new ArgumentException("Maximum page size is less than the number of items on this page");
             }

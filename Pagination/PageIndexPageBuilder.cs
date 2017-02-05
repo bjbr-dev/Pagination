@@ -17,6 +17,14 @@ namespace Pagination
             this.PageSize = pageSize;
         }
 
+        public PageIndexPageBuilder(Page page)
+        {
+            Ensure.NotNull(page, nameof(page));
+
+            this.PageNumber = page.PageNumber;
+            this.PageSize = page.MaximumPageSize;
+        }
+
         public int PageNumber { get; }
 
         public int PageSize { get; }
