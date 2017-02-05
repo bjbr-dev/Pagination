@@ -38,6 +38,16 @@ namespace Pagination
                 : GetCurrentPage(totalNumberOfItems, this.Skip);
         }
 
+        public Page GetPageContainingItem(int itemIndex, int totalNumberOfItems)
+        {
+            Ensure.GreaterThanOrEqualTo(1, totalNumberOfItems, nameof(totalNumberOfItems));
+            Ensure.LessThan(totalNumberOfItems, itemIndex, nameof(itemIndex));
+
+            return this.Take != null
+                ? this.GetCurrentPage(totalNumberOfItems, itemIndex, this.Take.Value)
+                : GetCurrentPage(totalNumberOfItems, itemIndex);
+        }
+
         private static Page GetCurrentPage(int totalNumberOfItems, int skip)
         {
             var pageNumber = skip == 0

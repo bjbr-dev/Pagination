@@ -23,17 +23,31 @@ namespace Pagination
 
         public Page GetCurrentPage(int totalNumberOfItems)
         {
-            var lastItemIndex = totalNumberOfItems - 1;
-            var lastPageNumber = (lastItemIndex / this.PageSize) + 1;
+            return GetCurrentPage(totalNumberOfItems, this.PageNumber, this.PageSize);
+        }
 
-            if (this.PageNumber > lastPageNumber)
+        public Page GetPageContainingItem(int itemIndex, int totalNumberOfItems)
+        {
+            Ensure.GreaterThanOrEqualTo(1, totalNumberOfItems, nameof(totalNumberOfItems));
+            Ensure.LessThan(totalNumberOfItems, itemIndex, nameof(itemIndex));
+
+            var page = (itemIndex / this.PageSize) + 1;
+            return GetCurrentPage(totalNumberOfItems, page, this.PageSize);
+        }
+
+        private static Page GetCurrentPage(int totalNumberOfItems, int pageNumber, int pageSize)
+        {
+            var lastItemIndex = totalNumberOfItems - 1;
+            var lastPageNumber = (lastItemIndex / pageSize) + 1;
+
+            if (pageNumber > lastPageNumber)
             {
-                return new Page(this.PageNumber, this.PageSize, false, -1, -1);
+                return new Page(pageNumber, pageSize, false, -1, -1);
             }
 
-            var firstPageItemIndex = Math.Min((this.PageNumber - 1) * this.PageSize, lastItemIndex);
-            var lastPageItemIndex = Math.Min((this.PageNumber * this.PageSize) - 1, lastItemIndex);
-            return new Page(this.PageNumber, this.PageSize, this.PageNumber == lastPageNumber, firstPageItemIndex, lastPageItemIndex);
+            var firstPageItemIndex = Math.Min((pageNumber - 1) * pageSize, lastItemIndex);
+            var lastPageItemIndex = Math.Min((pageNumber * pageSize) - 1, lastItemIndex);
+            return new Page(pageNumber, pageSize, pageNumber == lastPageNumber, firstPageItemIndex, lastPageItemIndex);
         }
     }
 }

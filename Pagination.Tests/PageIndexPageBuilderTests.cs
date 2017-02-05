@@ -130,5 +130,91 @@ namespace Pagination.Tests
                 result.ShouldBeEquivalentTo(new Page(4, 10, false, -1, -1));
             }
         }
+
+        private class GetPageContainingItem
+            : PageIndexPageBuilderTests
+        {
+            [TestCase(0)]
+            [TestCase(-1)]
+            public void Throws_exception_when_total_number_of_items_is_less_than_or_equal_to_zero(int totalNumberOfItems)
+            {
+                // Arrange
+                var sut = new PageIndexPageBuilder(1, 10);
+
+                // Act
+                Action act = () => sut.GetPageContainingItem(0, totalNumberOfItems);
+
+                // Assert
+                act.ShouldThrow<ArgumentException>()
+                   .WithMessage($"totalNumberOfItems must be greater than or equal to 1.\r\nParameter name: totalNumberOfItems\r\nActual value was {totalNumberOfItems}.");
+            }
+
+            [TestCase(26)]
+            [TestCase(27)]
+            public void Throws_exception_when_item_index_is_greater_than_the_total_number_of_items(int itemIndex)
+            {
+                // Arrange
+                var sut = new PageIndexPageBuilder(4, 10);
+
+                // Act
+                Action act = () => sut.GetPageContainingItem(itemIndex, 26);
+
+                // Assert
+                act.ShouldThrow<ArgumentException>()
+                   .WithMessage($"itemIndex must be less than 26.\r\nParameter name: itemIndex\r\nActual value was {itemIndex}.");
+            }
+
+            [Test]
+            public void Sets_appropriate_values_when_not_on_last_page()
+            {
+                // Arrange
+                var sut = new PageIndexPageBuilder(4, 10);
+
+                // Act
+                var result = sut.GetPageContainingItem(12, 60);
+
+                // Assert
+                result.ShouldBeEquivalentTo(new Page(2, 10, false, 10, 19));
+            }
+
+            [Test]
+            public void Sets_appropriate_values_when_on_last_page_with_one_value()
+            {
+                // Arrange
+                var sut = new PageIndexPageBuilder(4, 10);
+
+                // Act
+                var result = sut.GetPageContainingItem(30, 31);
+
+                // Assert
+                result.ShouldBeEquivalentTo(new Page(4, 10, true, 30, 30));
+            }
+
+            [Test]
+            public void Sets_appropriate_values_when_on_last_page_with_several_value()
+            {
+                // Arrange
+                var sut = new PageIndexPageBuilder(4, 10);
+
+                // Act
+                var result = sut.GetPageContainingItem(30, 34);
+
+                // Assert
+                result.ShouldBeEquivalentTo(new Page(4, 10, true, 30, 33));
+            }
+
+            [Test]
+            public void Sets_appropriate_values_when_on_last_full_page()
+            {
+                // Arrange
+                var sut = new PageIndexPageBuilder(4, 10);
+
+                // Act
+                var result = sut.GetPageContainingItem(30, 40);
+
+                // Assert
+                result.ShouldBeEquivalentTo(new Page(4, 10, true, 30, 39));
+            }
+        }
     }
 }
