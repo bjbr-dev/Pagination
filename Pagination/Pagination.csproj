@@ -2,6 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard1.3</TargetFramework>
+    <Version>1.0.0</Version>
+    <PackageId>berkeleybross.Pagination</PackageId>
+    <Authors>berkeleybross</Authors>
+    <Company>berkeleybross</Company>
+    <PackageLicenseUrl>https://github.com/berkeleybross/Pagination/blob/master/LICENSE</PackageLicenseUrl>
+    <Description>Lightweight library to perform pagination in backend code</Description>
+    <PackageProjectUrl>https://github.com/berkeleybross/Pagination</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/berkeleybross/Pagination</RepositoryUrl>
+    <RepositoryType></RepositoryType>
+    <PackageTags>Pagination Pager</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
