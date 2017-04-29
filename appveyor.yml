@@ -6,5 +6,6 @@ build_script:
 - ps: dotnet restore
 - ps: dotnet test Pagination.Tests/Pagination.Tests.csproj
 - ps: dotnet pack Pagination/Pagination.csproj -c Release --include-symbols /p:Version=$($Env:APPVEYOR_BUILD_VERSION)
+test: off
 artifacts:
   - path: 'Pagination\**\*.nupkg'
