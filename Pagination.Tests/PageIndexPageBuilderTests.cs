@@ -5,15 +5,14 @@ namespace Pagination.Tests
 {
     using System;
     using FluentAssertions;
-    using NUnit.Framework;
+    using Xunit;
 
-    [TestFixture]
     public class PageIndexPageBuilderTests
     {
-        private class Constructor
+        public class Constructor
             : PageIndexPageBuilderTests
         {
-            [Test]
+            [Fact]
             public void Throws_exception_when_current_page_number_is_less_than_1()
             {
                 // Act
@@ -24,7 +23,7 @@ namespace Pagination.Tests
                    .WithMessage("pageNumber must be greater than or equal to 1.\r\nParameter name: pageNumber\r\nActual value was 0.");
             }
 
-            [Test]
+            [Fact]
             public void Throws_exception_when_page_size_is_less_than_0()
             {
                 // Act
@@ -36,10 +35,10 @@ namespace Pagination.Tests
             }
         }
 
-        private class GetCurrentPage
+        public class GetCurrentPage
             : PageIndexPageBuilderTests
         {
-            [Test]
+            [Fact]
             public void Sets_appropriate_values_when_there_are_no_items()
             {
                 // Arrange
@@ -52,7 +51,7 @@ namespace Pagination.Tests
                 result.ShouldBeEquivalentTo(new Page(1, 10, true, -1, -1));
             }
 
-            [Test]
+            [Fact]
             public void Sets_appropriate_values_when_there_are_no_items_and_not_on_first_page()
             {
                 // Arrange
@@ -65,7 +64,7 @@ namespace Pagination.Tests
                 result.ShouldBeEquivalentTo(new Page(4, 10, false, -1, -1));
             }
 
-            [Test]
+            [Fact]
             public void Sets_appropriate_values_when_not_on_last_page()
             {
                 // Arrange
@@ -78,7 +77,7 @@ namespace Pagination.Tests
                 result.ShouldBeEquivalentTo(new Page(4, 10, false, 30, 39));
             }
 
-            [Test]
+            [Fact]
             public void Sets_appropriate_values_when_on_last_page_with_one_value()
             {
                 // Arrange
@@ -91,7 +90,7 @@ namespace Pagination.Tests
                 result.ShouldBeEquivalentTo(new Page(4, 10, true, 30, 30));
             }
 
-            [Test]
+            [Fact]
             public void Sets_appropriate_values_when_on_last_page_with_several_value()
             {
                 // Arrange
@@ -104,7 +103,7 @@ namespace Pagination.Tests
                 result.ShouldBeEquivalentTo(new Page(4, 10, true, 30, 33));
             }
 
-            [Test]
+            [Fact]
             public void Sets_appropriate_values_when_on_last_full_page()
             {
                 // Arrange
@@ -117,7 +116,7 @@ namespace Pagination.Tests
                 result.ShouldBeEquivalentTo(new Page(4, 10, true, 30, 39));
             }
 
-            [Test]
+            [Fact]
             public void Sets_first_and_last_index_to_negative_1_when_past_last_page()
             {
                 // Arrange
@@ -131,11 +130,12 @@ namespace Pagination.Tests
             }
         }
 
-        private class GetPageContainingItem
+        public class GetPageContainingItem
             : PageIndexPageBuilderTests
         {
-            [TestCase(0)]
-            [TestCase(-1)]
+            [Theory]
+            [InlineData(0)]
+            [InlineData(-1)]
             public void Throws_exception_when_total_number_of_items_is_less_than_or_equal_to_zero(int totalNumberOfItems)
             {
                 // Arrange
@@ -149,8 +149,9 @@ namespace Pagination.Tests
                    .WithMessage($"totalNumberOfItems must be greater than or equal to 1.\r\nParameter name: totalNumberOfItems\r\nActual value was {totalNumberOfItems}.");
             }
 
-            [TestCase(26)]
-            [TestCase(27)]
+            [Theory]
+            [InlineData(26)]
+            [InlineData(27)]
             public void Throws_exception_when_item_index_is_greater_than_the_total_number_of_items(int itemIndex)
             {
                 // Arrange
@@ -164,7 +165,7 @@ namespace Pagination.Tests
                    .WithMessage($"itemIndex must be less than 26.\r\nParameter name: itemIndex\r\nActual value was {itemIndex}.");
             }
 
-            [Test]
+            [Fact]
             public void Sets_appropriate_values_when_not_on_last_page()
             {
                 // Arrange
@@ -177,7 +178,7 @@ namespace Pagination.Tests
                 result.ShouldBeEquivalentTo(new Page(2, 10, false, 10, 19));
             }
 
-            [Test]
+            [Fact]
             public void Sets_appropriate_values_when_on_last_page_with_one_value()
             {
                 // Arrange
@@ -190,7 +191,7 @@ namespace Pagination.Tests
                 result.ShouldBeEquivalentTo(new Page(4, 10, true, 30, 30));
             }
 
-            [Test]
+            [Fact]
             public void Sets_appropriate_values_when_on_last_page_with_several_value()
             {
                 // Arrange
@@ -203,7 +204,7 @@ namespace Pagination.Tests
                 result.ShouldBeEquivalentTo(new Page(4, 10, true, 30, 33));
             }
 
-            [Test]
+            [Fact]
             public void Sets_appropriate_values_when_on_last_full_page()
             {
                 // Arrange

@@ -5,15 +5,14 @@ namespace Pagination.Tests
 {
     using System;
     using FluentAssertions;
-    using NUnit.Framework;
+    using Xunit;
 
-    [TestFixture]
     public class PagedListTests
     {
-        private class Constructor
+        public class Constructor
             : PagedListTests
         {
-            [Test]
+            [Fact]
             public void Throws_exception_when_total_item_count_is_less_than_0()
             {
                 // Act
@@ -24,10 +23,10 @@ namespace Pagination.Tests
             }
         }
 
-        private class TotalItemCount
+        public class TotalItemCount
             : PagedListTests
         {
-            [Test]
+            [Fact]
             public void Returns_constructor_argument()
             {
                 // Arrange
@@ -41,29 +40,30 @@ namespace Pagination.Tests
             }
         }
 
-        private class PageCount
+        public class PageCount
             : PagedListTests
         {
-            [TestCase(0, 10, ExpectedResult = 1, Description = "Returns 1 when there are no items")]
-            [TestCase(5, 10, ExpectedResult = 1, Description = "Returns 1 when number of items is less than page size")]
-            [TestCase(10, 10, ExpectedResult = 1, Description = "Returns 1 when number of items match page size")]
-            [TestCase(20, 5, ExpectedResult = 4, Description = "Multiple pages, all full")]
-            [TestCase(16, 5, ExpectedResult = 4, Description = "Multiple pages, one item on last page")]
-            [TestCase(18, 5, ExpectedResult = 4, Description = "Multiple pages, last one partially filled")]
-            public int Returns_appropriate_value(int totalItemCount, int pageSize)
+            [Theory]
+            [InlineData(0, 10,  1)]
+            [InlineData(5, 10,  1)]
+            [InlineData(10, 10,  1)]
+            [InlineData(20, 5,  4)]
+            [InlineData(16, 5,  4)]
+            [InlineData(18, 5,  4)]
+            public void Returns_appropriate_value(int totalItemCount, int pageSize, int expected)
             {
                 // Arrange
                 var sut = new PagedList(totalItemCount, new Page(1, pageSize, false, -1, -1));
 
                 // Act
-                return sut.PageCount;
+                sut.PageCount.Should().Be(expected);
             }
         }
 
-        private class Pages
+        public class Pages
             : PagedListTests
         {
-            [Test]
+            [Fact]
             public void Returns_a_single_page_when_there_are_no_items()
             {
                 // Arrange
@@ -79,7 +79,7 @@ namespace Pagination.Tests
                     });
             }
 
-            [Test]
+            [Fact]
             public void Returns_a_single_page_when_number_of_items_is_less_than_page_size()
             {
                 // Arrange
@@ -95,7 +95,7 @@ namespace Pagination.Tests
                     });
             }
 
-            [Test]
+            [Fact]
             public void Returns_a_single_page_when_number_of_items_is_equal_to_page_size()
             {
                 // Arrange
@@ -111,7 +111,7 @@ namespace Pagination.Tests
                     });
             }
 
-            [Test]
+            [Fact]
             public void Returns_multiple_pages_when_there_are_more_items_than_page_size()
             {
                 // Arrange
@@ -130,7 +130,7 @@ namespace Pagination.Tests
                     });
             }
 
-            [Test]
+            [Fact]
             public void Returns_multiple_pages_when_there_is_only_one_item_on_the_last_page()
             {
                 // Arrange
@@ -149,7 +149,7 @@ namespace Pagination.Tests
                     });
             }
 
-            [Test]
+            [Fact]
             public void Returns_multiple_pages_when_the_last_page_is_partially_filled()
             {
                 // Arrange

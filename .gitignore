@@ -11,3 +11,4 @@ Pagination.Tests/obj/
 .vs/
 **/*.user
 _NCrunch_*
+ncrunchtemp*

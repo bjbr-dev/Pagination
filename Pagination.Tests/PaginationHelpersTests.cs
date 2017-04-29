@@ -3,18 +3,16 @@
 // </copyright>
 namespace Pagination.Tests
 {
-    using System.Collections.Immutable;
     using System.Linq;
     using FluentAssertions;
-    using NUnit.Framework;
+    using Xunit;
 
-    [TestFixture]
     public class PaginationHelpersTests
     {
-        private class PageEnumerable
+        public class PageEnumerable
             : PaginationHelpersTests
         {
-            [Test]
+            [Fact]
             public void Returns_empty_pagedlist_when_given_empty_source()
             {
                 // Arrange
@@ -28,7 +26,7 @@ namespace Pagination.Tests
                 result.ShouldBeEquivalentTo(PagedList<int>.Empty(0, currentPage));
             }
 
-            [Test]
+            [Fact]
             public void Skips_appropriate_number()
             {
                 // Arrange
@@ -42,7 +40,7 @@ namespace Pagination.Tests
                 result.ShouldBeEquivalentTo(PagedList<int>.Create(9, currentPage, new[] { 3, 4, 5, 6, 7, 8, 9 }));
             }
 
-            [Test]
+            [Fact]
             public void Takes_appropriate_number()
             {
                 // Arrange
@@ -56,7 +54,7 @@ namespace Pagination.Tests
                 result.ShouldBeEquivalentTo(PagedList<int>.Create(9, currentPage, new[] { 1, 2 }));
             }
 
-            [Test]
+            [Fact]
             public void Skips_and_takes_appropriate_number()
             {
                 // Arrange
@@ -69,7 +67,7 @@ namespace Pagination.Tests
                 result.ShouldBeEquivalentTo(PagedList<int>.Create(9, new Page(3, 2, false, 4, 5), new[] { 5, 6 }));
             }
 
-            [Test]
+            [Fact]
             public void Allows_page_to_be_past_last_item()
             {
                 // Arrange
@@ -83,10 +81,10 @@ namespace Pagination.Tests
             }
         }
 
-        private class PageQueryable
+        public class PageQueryable
             : PaginationHelpersTests
         {
-            [Test]
+            [Fact]
             public void Returns_empty_pagedlist_when_given_empty_source()
             {
                 // Arrange
@@ -100,7 +98,7 @@ namespace Pagination.Tests
                 result.ShouldBeEquivalentTo(PagedList<int>.Empty(0, currentPage));
             }
 
-            [Test]
+            [Fact]
             public void Skips_appropriate_number()
             {
                 // Arrange
@@ -114,7 +112,7 @@ namespace Pagination.Tests
                 result.ShouldBeEquivalentTo(PagedList<int>.Create(9, currentPage, new[] { 3, 4, 5, 6, 7, 8, 9 }));
             }
 
-            [Test]
+            [Fact]
             public void Takes_appropriate_number()
             {
                 // Arrange
@@ -128,7 +126,7 @@ namespace Pagination.Tests
                 result.ShouldBeEquivalentTo(PagedList<int>.Create(9, currentPage, new[] { 1, 2 }));
             }
 
-            [Test]
+            [Fact]
             public void Skips_and_takes_appropriate_number()
             {
                 // Arrange
@@ -141,7 +139,7 @@ namespace Pagination.Tests
                 result.ShouldBeEquivalentTo(PagedList<int>.Create(9, new Page(3, 2, false, 4, 5), new[] { 5, 6 }));
             }
 
-            [Test]
+            [Fact]
             public void Allows_page_to_be_past_last_item()
             {
                 // Arrange
