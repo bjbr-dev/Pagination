@@ -4,6 +4,6 @@ pull_requests:
   do_not_increment_build_number: true
 build_script:
 - ps: dotnet restore
-- ps: dotnet pack Pagination/Pagination.csproj -c Release --include-symbols /p:Version=$(APPVEYOR_VERSION_NUMBER)
+- ps: dotnet pack Pagination/Pagination.csproj -c Release --include-symbols /p:Version=$(Env:APPVEYOR_BUILD_VERSION)
 artifacts:
   - path: 'Pagination\*.nupkg'
