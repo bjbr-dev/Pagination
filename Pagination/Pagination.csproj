@@ -12,6 +12,7 @@
     <RepositoryUrl>https://github.com/berkeleybross/Pagination</RepositoryUrl>
     <RepositoryType></RepositoryType>
     <PackageTags>Pagination Pager</PackageTags>
+    <Copyright>Copyright 2017</Copyright>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
