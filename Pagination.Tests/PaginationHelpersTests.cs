@@ -23,7 +23,7 @@ namespace Pagination.Tests
 
                 // Assert
                 var currentPage = new Page(2, int.MaxValue, true, -1, -1);
-                result.ShouldBeEquivalentTo(PagedList<int>.Empty(0, currentPage));
+                result.Should().BeEquivalentTo(PagedList<int>.Empty(0, currentPage));
             }
 
             [Fact]
@@ -37,7 +37,7 @@ namespace Pagination.Tests
 
                 // Assert
                 var currentPage = new Page(2, int.MaxValue, true, 2, 8);
-                result.ShouldBeEquivalentTo(PagedList<int>.Create(9, currentPage, new[] { 3, 4, 5, 6, 7, 8, 9 }));
+                result.Should().BeEquivalentTo(PagedList<int>.Create(9, currentPage, new[] { 3, 4, 5, 6, 7, 8, 9 }));
             }
 
             [Fact]
@@ -51,7 +51,7 @@ namespace Pagination.Tests
 
                 // Assert
                 var currentPage = new Page(1, 2, false, 0, 1);
-                result.ShouldBeEquivalentTo(PagedList<int>.Create(9, currentPage, new[] { 1, 2 }));
+                result.Should().BeEquivalentTo(PagedList<int>.Create(9, currentPage, new[] { 1, 2 }));
             }
 
             [Fact]
@@ -64,7 +64,7 @@ namespace Pagination.Tests
                 var result = source.Page(4, 2);
 
                 // Assert
-                result.ShouldBeEquivalentTo(PagedList<int>.Create(9, new Page(3, 2, false, 4, 5), new[] { 5, 6 }));
+                result.Should().BeEquivalentTo(PagedList<int>.Create(9, new Page(3, 2, false, 4, 5), new[] { 5, 6 }));
             }
 
             [Fact]
@@ -77,7 +77,7 @@ namespace Pagination.Tests
                 var result = source.Page(50, 2);
 
                 // Assert
-                result.ShouldBeEquivalentTo(PagedList<int>.Empty(9, new Page(26, 2, false, -1, -1)));
+                result.Should().BeEquivalentTo(PagedList<int>.Empty(9, new Page(26, 2, false, -1, -1)));
             }
         }
 
@@ -95,7 +95,7 @@ namespace Pagination.Tests
 
                 // Assert
                 var currentPage = new Page(2, int.MaxValue, true, -1, -1);
-                result.ShouldBeEquivalentTo(PagedList<int>.Empty(0, currentPage));
+                result.Should().BeEquivalentTo(PagedList<int>.Empty(0, currentPage));
             }
 
             [Fact]
@@ -109,7 +109,7 @@ namespace Pagination.Tests
 
                 // Assert
                 var currentPage = new Page(2, int.MaxValue, true, 2, 8);
-                result.ShouldBeEquivalentTo(PagedList<int>.Create(9, currentPage, new[] { 3, 4, 5, 6, 7, 8, 9 }));
+                result.Should().BeEquivalentTo(PagedList<int>.Create(9, currentPage, new[] { 3, 4, 5, 6, 7, 8, 9 }));
             }
 
             [Fact]
@@ -123,7 +123,7 @@ namespace Pagination.Tests
 
                 // Assert
                 var currentPage = new Page(1, 2, false, 0, 1);
-                result.ShouldBeEquivalentTo(PagedList<int>.Create(9, currentPage, new[] { 1, 2 }));
+                result.Should().BeEquivalentTo(PagedList<int>.Create(9, currentPage, new[] { 1, 2 }));
             }
 
             [Fact]
@@ -136,7 +136,7 @@ namespace Pagination.Tests
                 var result = source.Page(4, 2);
 
                 // Assert
-                result.ShouldBeEquivalentTo(PagedList<int>.Create(9, new Page(3, 2, false, 4, 5), new[] { 5, 6 }));
+                result.Should().BeEquivalentTo(PagedList<int>.Create(9, new Page(3, 2, false, 4, 5), new[] { 5, 6 }));
             }
 
             [Fact]
@@ -149,7 +149,7 @@ namespace Pagination.Tests
                 var result = source.Page(50, 2);
 
                 // Assert
-                result.ShouldBeEquivalentTo(PagedList<int>.Empty(9, new Page(26, 2, false, -1, -1)));
+                result.Should().BeEquivalentTo(PagedList<int>.Empty(9, new Page(26, 2, false, -1, -1)));
             }
         }
     }

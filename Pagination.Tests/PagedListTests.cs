@@ -19,7 +19,7 @@ namespace Pagination.Tests
                 Action act = () => new PagedList(-1, new Page(1, 10, false, -1, -1));
 
                 // Assert
-                act.ShouldThrow<ArgumentOutOfRangeException>();
+                act.Should().Throw<ArgumentOutOfRangeException>();
             }
         }
 
@@ -73,7 +73,7 @@ namespace Pagination.Tests
                 var pages = sut.Pages;
 
                 // Assert
-                pages.ShouldBeEquivalentTo(new[]
+                pages.Should().BeEquivalentTo(new[]
                     {
                         new Page(1, 10, true, -1, -1)
                     });
@@ -89,7 +89,7 @@ namespace Pagination.Tests
                 var pages = sut.Pages;
 
                 // Assert
-                pages.ShouldBeEquivalentTo(new[]
+                pages.Should().BeEquivalentTo(new[]
                     {
                         new Page(1, 10, true, 0, 4)
                     });
@@ -105,7 +105,7 @@ namespace Pagination.Tests
                 var pages = sut.Pages;
 
                 // Assert
-                pages.ShouldBeEquivalentTo(new[]
+                pages.Should().BeEquivalentTo(new[]
                     {
                         new Page(1, 10, true, 0, 9)
                     });
@@ -121,7 +121,7 @@ namespace Pagination.Tests
                 var pages = sut.Pages;
 
                 // Assert
-                pages.ShouldBeEquivalentTo(new[]
+                pages.Should().BeEquivalentTo(new[]
                     {
                         new Page(1, 5, false, 0, 4),
                         new Page(2, 5, false, 5, 9),
@@ -140,7 +140,7 @@ namespace Pagination.Tests
                 var pages = sut.Pages;
 
                 // Assert
-                pages.ShouldBeEquivalentTo(new[]
+                pages.Should().BeEquivalentTo(new[]
                     {
                         new Page(1, 5, false, 0, 4),
                         new Page(2, 5, false, 5, 9),
@@ -159,7 +159,7 @@ namespace Pagination.Tests
                 var pages = sut.Pages;
 
                 // Assert
-                pages.ShouldBeEquivalentTo(new[]
+                pages.Should().BeEquivalentTo(new[]
                     {
                         new Page(1, 5, false, 0, 4),
                         new Page(2, 5, false, 5, 9),

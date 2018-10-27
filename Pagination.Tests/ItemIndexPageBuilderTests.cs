@@ -19,7 +19,7 @@ namespace Pagination.Tests
                 Action act = () => new ItemIndexPageBuilder(-1, null);
 
                 // Assert
-                act.ShouldThrow<ArgumentException>().WithMessage("skip must be greater than or equal to 0.\r\nParameter name: skip\r\nActual value was -1.");
+                act.Should().Throw<ArgumentException>().WithMessage("skip must be greater than or equal to 0.\r\nParameter name: skip\r\nActual value was -1.");
             }
 
             [Fact]
@@ -29,7 +29,7 @@ namespace Pagination.Tests
                 Action act = () => new ItemIndexPageBuilder(0, 0);
 
                 // Assert
-                act.ShouldThrow<ArgumentException>().WithMessage("take must be greater than or equal to 1.\r\nParameter name: take\r\nActual value was 0.");
+                act.Should().Throw<ArgumentException>().WithMessage("take must be greater than or equal to 1.\r\nParameter name: take\r\nActual value was 0.");
             }
 
             [Fact]
@@ -39,7 +39,7 @@ namespace Pagination.Tests
                 Action act = () => new ItemIndexPageBuilder(2, 5);
 
                 // Assert
-                act.ShouldThrow<ArgumentException>().WithMessage("Skip must be a multiple of take");
+                act.Should().Throw<ArgumentException>().WithMessage("Skip must be a multiple of take");
             }
         }
 
@@ -56,7 +56,7 @@ namespace Pagination.Tests
                 var result = sut.GetCurrentPage(0);
 
                 // Assert
-                result.ShouldBeEquivalentTo(new Page(1, int.MaxValue, true, -1, -1));
+                result.Should().BeEquivalentTo(new Page(1, int.MaxValue, true, -1, -1));
             }
 
             [Fact]
@@ -69,7 +69,7 @@ namespace Pagination.Tests
                 var result = sut.GetCurrentPage(0);
 
                 // Assert
-                result.ShouldBeEquivalentTo(new Page(1, 5, true, -1, -1));
+                result.Should().BeEquivalentTo(new Page(1, 5, true, -1, -1));
             }
 
             [Fact]
@@ -82,7 +82,7 @@ namespace Pagination.Tests
                 var result = sut.GetCurrentPage(50);
 
                 // Assert
-                result.ShouldBeEquivalentTo(new Page(1, int.MaxValue, true, 0, 49));
+                result.Should().BeEquivalentTo(new Page(1, int.MaxValue, true, 0, 49));
             }
 
             [Fact]
@@ -95,7 +95,7 @@ namespace Pagination.Tests
                 var result = sut.GetCurrentPage(50);
 
                 // Assert
-                result.ShouldBeEquivalentTo(new Page(2, int.MaxValue, true, 10, 49));
+                result.Should().BeEquivalentTo(new Page(2, int.MaxValue, true, 10, 49));
             }
 
             [Fact]
@@ -108,7 +108,7 @@ namespace Pagination.Tests
                 var result = sut.GetCurrentPage(50);
 
                 // Assert
-                result.ShouldBeEquivalentTo(new Page(1, 10, false, 0, 9));
+                result.Should().BeEquivalentTo(new Page(1, 10, false, 0, 9));
             }
 
             [Theory]
@@ -136,7 +136,7 @@ namespace Pagination.Tests
                 var result = sut.GetCurrentPage(50);
 
                 // Assert
-                result.ShouldBeEquivalentTo(new Page(7, 10, false, -1, -1));
+                result.Should().BeEquivalentTo(new Page(7, 10, false, -1, -1));
             }
 
             [Fact]
@@ -149,7 +149,7 @@ namespace Pagination.Tests
                 var result = sut.GetCurrentPage(50);
 
                 // Assert
-                result.ShouldBeEquivalentTo(new Page(5, 10, true, 40, 49));
+                result.Should().BeEquivalentTo(new Page(5, 10, true, 40, 49));
             }
 
             [Fact]
@@ -162,7 +162,7 @@ namespace Pagination.Tests
                 var result = sut.GetCurrentPage(53);
 
                 // Assert
-                result.ShouldBeEquivalentTo(new Page(6, 10, true, 50, 52));
+                result.Should().BeEquivalentTo(new Page(6, 10, true, 50, 52));
             }
         }
 
@@ -181,7 +181,7 @@ namespace Pagination.Tests
                 Action act = () => sut.GetPageContainingItem(0, totalNumberOfItems);
 
                 // Assert
-                act.ShouldThrow<ArgumentException>()
+                act.Should().Throw<ArgumentException>()
                    .WithMessage($"totalNumberOfItems must be greater than or equal to 1.\r\nParameter name: totalNumberOfItems\r\nActual value was {totalNumberOfItems}.");
             }
 
@@ -197,7 +197,7 @@ namespace Pagination.Tests
                 Action act = () => sut.GetPageContainingItem(itemIndex, 26);
 
                 // Assert
-                act.ShouldThrow<ArgumentException>()
+                act.Should().Throw<ArgumentException>()
                    .WithMessage($"itemIndex must be less than 26.\r\nParameter name: itemIndex\r\nActual value was {itemIndex}.");
             }
 
@@ -211,7 +211,7 @@ namespace Pagination.Tests
                 var result = sut.GetPageContainingItem(0, 50);
 
                 // Assert
-                result.ShouldBeEquivalentTo(new Page(1, int.MaxValue, true, 0, 49));
+                result.Should().BeEquivalentTo(new Page(1, int.MaxValue, true, 0, 49));
             }
 
             [Fact]
@@ -224,7 +224,7 @@ namespace Pagination.Tests
                 var result = sut.GetPageContainingItem(10, 50);
 
                 // Assert
-                result.ShouldBeEquivalentTo(new Page(2, int.MaxValue, true, 10, 49));
+                result.Should().BeEquivalentTo(new Page(2, int.MaxValue, true, 10, 49));
             }
 
             [Fact]
@@ -237,7 +237,7 @@ namespace Pagination.Tests
                 var result = sut.GetPageContainingItem(0, 50);
 
                 // Assert
-                result.ShouldBeEquivalentTo(new Page(1, 10, false, 0, 9));
+                result.Should().BeEquivalentTo(new Page(1, 10, false, 0, 9));
             }
 
             [Theory]

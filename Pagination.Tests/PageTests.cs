@@ -20,7 +20,7 @@ namespace Pagination.Tests
                 Action act = () => new Page(0, 10, true, 0, 9);
 
                 // Assert
-                act.ShouldThrow<ArgumentException>()
+                act.Should().Throw<ArgumentException>()
                    .WithMessage("pageNumber must be greater than or equal to 1.\r\nParameter name: pageNumber\r\nActual value was 0.");
             }
 
@@ -32,7 +32,7 @@ namespace Pagination.Tests
                 Action act = () => new Page(1, 10, true, -2, 9);
 
                 // Assert
-                act.ShouldThrow<ArgumentException>()
+                act.Should().Throw<ArgumentException>()
                    .WithMessage("firstItemIndex must be greater than or equal to -1.\r\nParameter name: firstItemIndex\r\nActual value was -2.");
             }
 
@@ -44,7 +44,7 @@ namespace Pagination.Tests
                 Action act = () => new Page(1, 10, true, 0, -2);
 
                 // Assert
-                act.ShouldThrow<ArgumentException>()
+                act.Should().Throw<ArgumentException>()
                    .WithMessage("lastItemIndex must be greater than or equal to -1.\r\nParameter name: lastItemIndex\r\nActual value was -2.");
             }
 
@@ -56,7 +56,7 @@ namespace Pagination.Tests
                 Action act = () => new Page(1, 10, true, 20, 10);
 
                 // Assert
-                act.ShouldThrow<ArgumentException>()
+                act.Should().Throw<ArgumentException>()
                    .WithMessage("lastItemIndex must be greater than or equal to 20.\r\nParameter name: lastItemIndex\r\nActual value was 10.");
             }
 
@@ -68,7 +68,7 @@ namespace Pagination.Tests
                 Action act = () => new Page(1, 10, true, -1, 10);
 
                 // Assert
-                act.ShouldThrow<ArgumentException>()
+                act.Should().Throw<ArgumentException>()
                    .WithMessage("When firstItemIndex or lastItemIndex is -1, both must be");
             }
         }
